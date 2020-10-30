@@ -5,13 +5,13 @@ import Sign from "./Sign.js";
 import "./AppHeader.css";
 
 function AppHeader({ user }) {
-  const [open, setOpen] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
   return (
     <div className="appHeader">
       <Sign
-        open={open}
-        setOpen={setOpen}
+        openSignUp={openSignUp}
+        setOpenSignUp={setOpenSignUp}
         openSignIn={openSignIn}
         setOpenSignIn={setOpenSignIn}
       />
@@ -25,7 +25,7 @@ function AppHeader({ user }) {
       ) : (
         <div className="appHeader_loginContainer">
           <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
 import { auth } from "./firebase";
+import "./Sign.css";
 
 function getModalStyle() {
   const top = 50;
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Sign({ openSignIn, setOpenSignIn, open, setOpen }) {
+function Sign({ openSignIn, setOpenSignIn, openSignUp, setOpenSignUp }) {
   // Styles
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -44,7 +45,7 @@ function Sign({ openSignIn, setOpenSignIn, open, setOpen }) {
       )
       .catch((error) => alert(error.message));
 
-    setOpen(false);
+    setOpenSignUp(false);
   };
 
   const signIn = (event) => {
@@ -58,8 +59,8 @@ function Sign({ openSignIn, setOpenSignIn, open, setOpen }) {
 
   return (
     <Modal
-      open={openSignIn || open}
-      onClose={() => (openSignIn ? setOpenSignIn(false) : setOpen(false))}
+      open={openSignIn || openSignUp}
+      onClose={() => (openSignIn ? setOpenSignIn(false) : setOpenSignUp(false))}
     >
       <div style={modalStyle} className={classes.paper}>
         <center>
@@ -69,8 +70,8 @@ function Sign({ openSignIn, setOpenSignIn, open, setOpen }) {
             alt=""
           />
         </center>
-        <form className="app__signup">
-          {open && (
+        <form className="sign__form">
+          {openSignUp && (
             <Input
               placeholder="username"
               type="text"

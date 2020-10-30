@@ -5,13 +5,9 @@ import Post from "./Post.js";
 import { db, auth } from "./firebase";
 import ImageUpload from "./ImageUpload";
 import AppHeader from "./AppHeader";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [openSignIn, setOpenSignIn] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -45,9 +41,7 @@ function App() {
 
   return (
     <div className="app">
-      <SignUp open={open} setOpen={setOpen} />
-      <SignIn openSignIn={openSignIn} setOpenSignIn={setOpenSignIn} />
-      <AppHeader user={user} setOpen={setOpen} setOpenSignIn={setOpenSignIn} />
+      <AppHeader user={user} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           <Post

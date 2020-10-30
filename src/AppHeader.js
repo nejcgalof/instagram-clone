@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import { auth } from "./firebase";
+import Sign from "./Sign.js";
 import "./AppHeader.css";
 
-function AppHeader({ user, setOpen, setOpenSignIn }) {
+function AppHeader({ user }) {
+  const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   return (
     <div className="appHeader">
+      <Sign
+        open={open}
+        setOpen={setOpen}
+        openSignIn={openSignIn}
+        setOpenSignIn={setOpenSignIn}
+      />
       <img
         className="appHeader__image"
         src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"

@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
+import AppHeader from "./AppHeader";
 
 function getModalStyle() {
   const top = 50;
@@ -154,21 +155,7 @@ function App() {
           </form>
         </div>
       </Modal>
-      <div className="app__header">
-        <img
-          className="app__headerImage"
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-          alt=""
-        />
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-        ) : (
-          <div className="app_loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          </div>
-        )}
-      </div>
+      <AppHeader user={user} setOpen={setOpen} setOpenSignIn={setOpenSignIn} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           <Post

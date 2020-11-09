@@ -13,3 +13,12 @@
 .appHeader__image {
   object-fit: contain;
 }
+
+.appHeader_rightSide {
+  display: flex;
+}
+
+.appHeader_name {
+  margin-top: 4px;
+  margin-right: 20px;
+}

@@ -54,8 +54,8 @@ function App() {
           />
         ))}
       </div>
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
+      {user ? (
+        <ImageUpload user={user} />
       ) : (
         <h3>Sorry you need to login to upload</h3>
       )}

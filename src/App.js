@@ -22,7 +22,7 @@ function App() {
     return () => {
       unsubscribe();
     };
-  }, [user]);
+  }, []);
 
   // UseEffect - runs a piece of code based on a specific condition
   // Every time posts change, run this code

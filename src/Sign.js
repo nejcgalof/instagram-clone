@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Sign({ openSignIn, setOpenSignIn, openSignUp, setOpenSignUp }) {
+function Sign({
+  openSignIn,
+  setOpenSignIn,
+  openSignUp,
+  setOpenSignUp,
+  setUser,
+}) {
   // Styles
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -36,25 +42,29 @@ function Sign({ openSignIn, setOpenSignIn, openSignUp, setOpenSignUp }) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const signUp = (event) => {
-    event.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) =>
-        authUser.user.updateProfile({ displayName: username })
-      )
-      .catch((error) => alert(error.message));
-
-    setOpenSignUp(false);
+  const signUp = async (event) => {
+    try {
+      event.preventDefault();
+      const newUser = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await newUser.user.updateProfile({ displayName: username });
+      setUser(newUser);
+      setOpenSignUp(false);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
-  const signIn = (event) => {
-    event.preventDefault();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => alert(error.message));
-
-    setOpenSignIn(false);
+  const signIn = async (event) => {
+    try {
+      event.preventDefault();
+      await auth.signInWithEmailAndPassword(email, password);
+      setOpenSignIn(false);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="app">
-      <AppHeader user={user} />
+      <AppHeader user={user} setUser={setUser} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           <Post

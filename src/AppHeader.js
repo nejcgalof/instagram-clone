@@ -21,14 +21,19 @@ function AppHeader({ user, setUser }) {
         src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
         alt=""
       />
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="appHeader_loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
-        </div>
-      )}
+      <div className="appHeader_rightSide">
+        {user ? (
+          <React.Fragment>
+            <h3 className="appHeader_name">Welcome {user.displayName}</h3>
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+          </React.Fragment>
+        ) : (
+          <div className="appHeader_loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpenSignUp(true)}>Sign Up</Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { auth } from "./firebase";
 import Sign from "./Sign.js";
 import "./AppHeader.css";
 
-function AppHeader({ user }) {
+function AppHeader({ user, setUser }) {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
   return (
@@ -14,6 +14,7 @@ function AppHeader({ user }) {
         setOpenSignUp={setOpenSignUp}
         openSignIn={openSignIn}
         setOpenSignIn={setOpenSignIn}
+        setUser={setUser}
       />
       <img
         className="appHeader__image"

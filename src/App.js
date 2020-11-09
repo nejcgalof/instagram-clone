@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ScrollToTop from "react-scroll-to-top";
 import "./App.css";
 import "./Post.js";
 import Post from "./Post.js";
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <div className="app">
+      <ScrollToTop smooth />
       <AppHeader user={user} setUser={setUser} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (

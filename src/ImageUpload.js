@@ -4,7 +4,7 @@ import { storage, db } from "./firebase";
 import firebase from "firebase/app";
 import "./ImageUpload.css";
 
-function ImageUpload({ username }) {
+function ImageUpload({ user }) {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
@@ -39,7 +39,7 @@ function ImageUpload({ username }) {
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               caption: caption,
               imageUrl: url,
-              username: username,
+              username: user?.displayName,
             });
             setProgress(0);
             setCaption("");

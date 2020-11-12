@@ -44,6 +44,11 @@ function App() {
     <div className="app">
       <ScrollToTop smooth />
       <AppHeader user={user} setUser={setUser} />
+      {user ? (
+        <ImageUpload user={user} />
+      ) : (
+        <h3>Sorry you need to login to upload</h3>
+      )}
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           <Post
@@ -56,11 +61,6 @@ function App() {
           />
         ))}
       </div>
-      {user ? (
-        <ImageUpload user={user} />
-      ) : (
-        <h3>Sorry you need to login to upload</h3>
-      )}
     </div>
   );
 }

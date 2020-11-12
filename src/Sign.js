@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
+import Alert from "@material-ui/lab/Alert";
 import { Button, Input } from "@material-ui/core";
 import { auth } from "./firebase";
 import "./Sign.css";
@@ -41,6 +42,7 @@ function Sign({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const signUp = async (event) => {
     try {
@@ -51,9 +53,10 @@ function Sign({
       );
       await newUser.user.updateProfile({ displayName: username });
       await newUser.user.reload();
+      setError("");
       setOpenSignUp(false);
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
@@ -61,9 +64,10 @@ function Sign({
     try {
       event.preventDefault();
       await auth.signInWithEmailAndPassword(email, password);
+      setError("");
       setOpenSignIn(false);
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
@@ -81,6 +85,7 @@ function Sign({
           />
         </center>
         <form className="sign__form">
+          {error && <Alert severity="error">{error}</Alert>}
           {openSignUp && (
             <Input
               placeholder="username"

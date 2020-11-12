@@ -50,7 +50,7 @@ function Sign({
         password
       );
       await newUser.user.updateProfile({ displayName: username });
-      setUser(newUser);
+      await newUser.user.reload();
       setOpenSignUp(false);
     } catch (error) {
       alert(error.message);

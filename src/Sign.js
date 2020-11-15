@@ -92,7 +92,11 @@ function Sign({
           />
         </center>
         <form className="sign__form">
-          {error && <Alert severity="error">{error}</Alert>}
+          {error && (
+            <Alert severity="error" className="sign__error">
+              {error}
+            </Alert>
+          )}
           {openSignUp && (
             <Input
               placeholder="username"

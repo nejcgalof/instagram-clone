@@ -44,6 +44,13 @@ function Sign({
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
+  const resetSignInformations = () => {
+    setUsername("");
+    setPassword("");
+    setEmail("");
+    setError("");
+  };
+
   const signUp = async (event) => {
     try {
       event.preventDefault();
@@ -53,7 +60,7 @@ function Sign({
       );
       await newUser.user.updateProfile({ displayName: username });
       await newUser.user.reload();
-      setError("");
+      resetSignInformations("");
       setOpenSignUp(false);
     } catch (error) {
       setError(error.message);
@@ -64,7 +71,7 @@ function Sign({
     try {
       event.preventDefault();
       await auth.signInWithEmailAndPassword(email, password);
-      setError("");
+      resetSignInformations("");
       setOpenSignIn(false);
     } catch (error) {
       setError(error.message);

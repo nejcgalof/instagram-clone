@@ -13,3 +13,15 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.app__notLogin {
+  box-sizing: border-box;
+  width: 60%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid lightgray;
+}

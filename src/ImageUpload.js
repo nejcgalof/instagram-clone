@@ -1,17 +1,34 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { makeStyles } from "@material-ui/core/styles";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { storage, db } from "./firebase";
 import firebase from "firebase/app";
 import "./ImageUpload.css";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: "none",
+  },
+}));
+
 function ImageUpload({ user }) {
+  const classes = useStyles();
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -44,21 +61,52 @@ function ImageUpload({ user }) {
             setProgress(0);
             setCaption("");
             setImage(null);
+            setImagePreview(null);
           });
       }
     );
   };
   return (
     <div className="imageupload">
-      <progress className="imageupload__progress" value={progress} max="100" />
+      <h2 className="imageupload_instruction">Upload something new</h2>
       <input
+        className="imageupload__caption"
         type="text"
         placeholder="Enter a caption..."
         onChange={(event) => setCaption(event.target.value)}
         value={caption}
       />
-      <input type="file" onChange={handleChange} />
-      <Button className="imageupload__button" onClick={handleUpload}>
+      <img className="imageupload__previewImage" src={imagePreview} alt="" />
+      <div className="imageupload__file">
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="contained-button-file"
+          type="file"
+          onChange={handleChange}
+        />
+        <label htmlFor="contained-button-file">
+          <Button
+            className="imageupload__fileButton"
+            color="primary"
+            variant="outlined"
+            startIcon={<CloudUploadIcon />}
+            component="span"
+          >
+            Load Image
+          </Button>
+        </label>
+      </div>
+      <LinearProgress
+        className="imageupload__progress"
+        variant="determinate"
+        value={progress}
+      />
+      <Button
+        color="primary"
+        className="imageupload__button"
+        onClick={handleUpload}
+      >
         Upload
       </Button>
     </div>

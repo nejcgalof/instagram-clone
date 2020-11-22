@@ -7,8 +7,30 @@
   margin-top: 10px;
   margin-bottom: 10px;
   background-color: white;
+  border: 1px solid lightgray;
 }
 
 .imageupload__progress {
-  width: 100%;
+  margin: 5px;
+}
+
+.imageupload__caption {
+  padding: 10px;
+  border: 1px solid lightgray;
+  margin: 5px;
+}
+
+.imageupload_instruction {
+  margin: 5px;
+}
+
+.imageupload__file {
+  margin: 5px;
+}
+
+.imageupload__previewImage {
+  height: 250px;
+  margin: 5px;
+  object-fit: contain;
+  border: 1px solid lightgray;
 }

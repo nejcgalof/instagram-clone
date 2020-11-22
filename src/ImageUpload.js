@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ImageUpload({ user }) {
+function ImageUpload({ user, setExpand }) {
   const classes = useStyles();
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -62,6 +62,7 @@ function ImageUpload({ user }) {
             setCaption("");
             setImage(null);
             setImagePreview(null);
+            setExpand(false);
           });
       }
     );

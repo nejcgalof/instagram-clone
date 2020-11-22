@@ -47,7 +47,9 @@ function App() {
       {user ? (
         <ImageUpload user={user} />
       ) : (
-        <h3>Sorry you need to login to upload</h3>
+        <div className="app__notLogin">
+          <h3>Sorry you need to login to upload</h3>
+        </div>
       )}
       <div className="app__posts">
         {posts.map(({ id, post }) => (

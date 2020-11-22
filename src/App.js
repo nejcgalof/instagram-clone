@@ -4,7 +4,7 @@ import "./App.css";
 import "./Post.js";
 import Post from "./Post.js";
 import { db, auth } from "./firebase";
-import ImageUpload from "./ImageUpload";
+import ImageUploadPreview from "./ImageUploadPreview";
 import AppHeader from "./AppHeader";
 
 function App() {
@@ -44,13 +44,7 @@ function App() {
     <div className="app">
       <ScrollToTop smooth />
       <AppHeader user={user} setUser={setUser} />
-      {user ? (
-        <ImageUpload user={user} />
-      ) : (
-        <div className="app__notLogin">
-          <h3>Sorry you need to login to upload</h3>
-        </div>
-      )}
+      <ImageUploadPreview user={user} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           <Post

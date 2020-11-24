@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { storage, db } from "./firebase";
 import firebase from "firebase/app";
+import Alert from "@material-ui/lab/Alert";
 import "./ImageUpload.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +25,7 @@ function ImageUpload({ user, setExpand }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -33,6 +35,13 @@ function ImageUpload({ user, setExpand }) {
   };
 
   const handleUpload = () => {
+    if (caption === "") {
+      setError("Write something in caption.");
+      return;
+    } else if (image === null) {
+      setError("Load image.");
+      return;
+    }
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
@@ -42,8 +51,7 @@ function ImageUpload({ user, setExpand }) {
         setProgress(progress);
       },
       (error) => {
-        console.log(error);
-        alert(error.message);
+        setError(error.message);
       },
       () => {
         // complete function
@@ -63,13 +71,19 @@ function ImageUpload({ user, setExpand }) {
             setImage(null);
             setImagePreview(null);
             setExpand(false);
+            setError("");
           });
       }
     );
   };
   return (
     <div className="imageupload">
-      <h2 className="imageupload_instruction">Upload something new</h2>
+      <h2 className="imageupload__instruction">Upload something new</h2>
+      {error && (
+        <Alert severity="error" className="imageupload__error">
+          {error}
+        </Alert>
+      )}
       <input
         className="imageupload__caption"
         type="text"

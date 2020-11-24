@@ -20,7 +20,7 @@
   margin: 5px;
 }
 
-.imageupload_instruction {
+.imageupload__instruction {
   margin: 5px;
 }
 
@@ -33,4 +33,8 @@
   margin: 5px;
   object-fit: contain;
   border: 1px solid lightgray;
+}
+
+.imageupload__error {
+  margin: 5px;
 }

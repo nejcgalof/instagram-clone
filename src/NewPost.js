@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NewPost({ postId, user, username, caption, imageUrl }) {
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
 

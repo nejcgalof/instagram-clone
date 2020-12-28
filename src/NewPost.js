@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewPost({ postId, user, username, caption, imageUrl }) {
+function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [comments, setComments] = useState([]);
@@ -102,7 +102,7 @@ function NewPost({ postId, user, username, caption, imageUrl }) {
           </IconButton>
         }
         title={username}
-        subheader="September 14, 2016"
+        subheader={timestamp == null ? "" : timestamp.toDate().toLocaleString()}
       />
       <CardMedia
         component="img"

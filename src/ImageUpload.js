@@ -65,6 +65,7 @@ function ImageUpload({ user, setExpand }) {
               caption: caption,
               imageUrl: url,
               username: user?.displayName,
+              userId: user?.uid,
             });
             setProgress(0);
             setCaption("");

@@ -130,17 +130,28 @@ function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className="post__comments">
           <div className="post__previousComments">
-            {comments.map((comment) => (
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  key={comment?.id}
+                >
+                  <strong>{comment?.comment?.username}</strong>{" "}
+                  {comment?.comment?.text}
+                </Typography>
+              ))
+            ) : (
               <Typography
                 variant="body2"
                 color="textSecondary"
                 component="p"
-                key={comment?.id}
+                key="noComment"
               >
-                <strong>{comment?.comment?.username}</strong>{" "}
-                {comment?.comment?.text}
+                No comments yet
               </Typography>
-            ))}
+            )}
           </div>
           {user && (
             <form className="post__commentBox">

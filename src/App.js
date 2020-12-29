@@ -55,6 +55,7 @@ function App() {
             caption={post.caption}
             imageUrl={post.imageUrl}
             timestamp={post.timestamp}
+            userId={post.userId}
           />
         ))}
       </div>

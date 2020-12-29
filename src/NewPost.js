@@ -45,7 +45,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
+function NewPost({
+  postId,
+  user,
+  username,
+  caption,
+  imageUrl,
+  timestamp,
+  userId,
+}) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [comments, setComments] = useState([]);
@@ -141,9 +149,13 @@ function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
           />
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon onClick={handleSettingsClick} />
-          </IconButton>
+          userId === user?.uid ? (
+            <IconButton aria-label="settings">
+              <MoreVertIcon onClick={handleSettingsClick} />
+            </IconButton>
+          ) : (
+            ""
+          )
         }
         title={username}
         subheader={timestamp == null ? "" : timestamp.toDate().toLocaleString()}

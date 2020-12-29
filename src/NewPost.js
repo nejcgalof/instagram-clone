@@ -14,7 +14,9 @@ import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import ChatIcon from "@material-ui/icons/Chat";
-import { db } from "./firebase";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { storage, db } from "./firebase";
 import firebase from "firebase/app";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +50,7 @@ function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
   const [expanded, setExpanded] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     let unsubscribe;
@@ -86,6 +89,47 @@ function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
     setExpanded(!expanded);
   };
 
+  const handleSettingsClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleDeletePost = async () => {
+    if (postId) {
+      await deleteImageFromPost();
+      handleDeleteAllComments();
+      db.collection("posts").doc(postId).delete();
+    }
+    handleCloseMenu();
+  };
+
+  const deleteImageFromPost = async () => {
+    if (postId) {
+      let ref = db.collection("posts").doc(postId);
+      await ref.get().then((userData) => {
+        storage.refFromURL(userData.data().imageUrl).delete();
+      });
+    }
+  };
+
+  const handleDeleteAllComments = () => {
+    if (postId) {
+      db.collection("posts")
+        .doc(postId)
+        .collection("comments")
+        .get()
+        .then((res) => {
+          res.forEach((element) => {
+            element.ref.delete();
+          });
+        });
+    }
+    handleCloseMenu();
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -98,12 +142,24 @@ function NewPost({ postId, user, username, caption, imageUrl, timestamp }) {
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <MoreVertIcon onClick={handleSettingsClick} />
           </IconButton>
         }
         title={username}
         subheader={timestamp == null ? "" : timestamp.toDate().toLocaleString()}
       />
+      <Menu
+        id="post__menu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleCloseMenu}
+        keepMounted
+      >
+        <MenuItem onClick={handleDeletePost}>Delete post</MenuItem>
+        <MenuItem onClick={handleDeleteAllComments}>
+          Delete all comments
+        </MenuItem>
+      </Menu>
       <CardMedia
         component="img"
         className={classes.media}

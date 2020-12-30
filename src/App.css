@@ -2,6 +2,13 @@
   margin: 0;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #fafafa;
+}
+
 .app {
   background-color: #fafafa;
 }
@@ -12,4 +19,5 @@
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 40px;
 }

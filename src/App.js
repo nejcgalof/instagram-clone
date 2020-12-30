@@ -6,6 +6,7 @@ import NewPost from "./NewPost.js";
 import { db, auth } from "./firebase";
 import ImageUploadPreview from "./ImageUploadPreview";
 import AppHeader from "./AppHeader";
+import Footer from "./Footer";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -59,6 +60,7 @@ function App() {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }

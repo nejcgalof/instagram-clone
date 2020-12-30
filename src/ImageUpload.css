@@ -10,31 +10,23 @@
   border: 1px solid lightgray;
 }
 
-.imageupload__progress {
-  margin: 5px;
-}
-
 .imageupload__caption {
   padding: 10px;
   border: 1px solid lightgray;
-  margin: 5px;
-}
-
-.imageupload__instruction {
-  margin: 5px;
-}
-
-.imageupload__file {
-  margin: 5px;
 }
 
 .imageupload__previewImage {
   height: 250px;
-  margin: 5px;
   object-fit: contain;
   border: 1px solid lightgray;
 }
 
-.imageupload__error {
+.imageupload__header,
+.imageupload__error,
+.imageupload__previewImage,
+.imageupload__file,
+.imageupload__instruction,
+.imageupload__caption,
+.imageupload__progress {
   margin: 5px;
 }

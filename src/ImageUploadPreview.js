@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Typography from "@material-ui/core/Typography";
 import "./ImageUploadPreview.css";
 
 function renderContent(user, expand, setExpand, handleExpandUploadPreview) {
@@ -28,7 +29,9 @@ function renderContent(user, expand, setExpand, handleExpandUploadPreview) {
     }
     return (
       <div className="imageUploadPreview__notLogin">
-        <h3>Sorry you need to login to upload</h3>
+        <Typography variant="button" color="primary">
+          Sorry, you need to login to upload
+        </Typography>
       </div>
     );
   }

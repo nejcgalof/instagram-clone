@@ -6,6 +6,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { storage, db } from "./firebase";
 import firebase from "firebase/app";
 import Alert from "@material-ui/lab/Alert";
+import Typography from "@material-ui/core/Typography";
 import "./ImageUpload.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +80,11 @@ function ImageUpload({ user, setExpand }) {
   };
   return (
     <div className="imageupload">
-      <h2 className="imageupload__instruction">Upload something new</h2>
+      <div className="imageupload__header">
+        <Typography variant="h5" color="primary">
+          Upload something new
+        </Typography>
+      </div>
       {error && (
         <Alert severity="error" className="imageupload__error">
           {error}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import "./App.css";
-import "./NewPost.js";
-import NewPost from "./NewPost.js";
+import Post from "./Post.js";
 import { db, auth } from "./firebase";
 import ImageUploadPreview from "./ImageUploadPreview";
 import AppHeader from "./AppHeader";
@@ -48,7 +47,7 @@ function App() {
       <ImageUploadPreview user={user} />
       <div className="app__posts">
         {posts.map(({ id, post }) => (
-          <NewPost
+          <Post
             key={id}
             postId={id}
             user={user}
